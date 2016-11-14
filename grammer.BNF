@@ -1,0 +1,38 @@
+DOCB 		::= '\BEGIN'
+DOCE 		::= '\END'
+TITLEB		::= '\TITLE['
+HEADING		::= '#' ;
+PARB		::= '\PARAB'
+PARE		::= '\PARAE'
+BOLD		::= '**'
+ITALICS		::=  '*'
+LISTITEMB 	::= '+'
+NEWLINE		::= '\\'
+LINKB		::= '['
+LINKE		::= ']'
+IMAGEB		::= '!['
+ADDRESSB	::= '('
+ADDRESSE	::= ')'
+DEFBI		::= '\DEF['
+USEB		::= '\USE['
+EQUALS		::= '='
+REQTEXT     ::= ''
+TEXT        ::= ''
+
+
+
+<gittex>	    ::= DOCB <vardef> <title> <body> DOCE
+<title>		    ::= TITLEB TEXT LINKE
+<body>		    ::= <innertext> <body> | <paragraph> <body> | <newline><body>
+<paragraph> 	::= PARB <vardef> <innertext> PARE
+<innertext>     ::= <varuse><innertext> | <heading><innertext> | <bold><innertext> | <italics><innertext> | <images><innertext> | <link><innertext> | TEXT <innertext>
+<heading>	    ::= HEADING REQTEXT
+<vardef>	    ::= DEFBI REQTEXT EQUALS REQTEXT LINKE <vardef>
+<varuse>	    ::= USEB REQTEXT LINKE
+<bold> 	        ::= BOLD TEXT BOLD
+<italics>	    ::= ITALICS TEXT ITALICS
+<listitem>	    ::= LISTITEMB <inneritem><listitem>
+<inneritem>     ::= <varuse><inneritem> | <bold><inneritem> | <italics><inneritem> | <link><inneritem> | REQTEXT <inneritem>
+<link>		    ::= LINKB REQTEXT LINKE ADDRESSB REQTEXT ADDRESSE
+<images>	    ::= IMAGEB REQTEXT LINKE ADDRESSB REQTEXT ADDRESSE
+<newline>       ::= NEWLINE
