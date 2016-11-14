@@ -3,7 +3,7 @@ package cosc455.towson.edu
 /**
   * Created by MBH on 11/13/2016.
   */
-class MySemanticAnalyzer extends SyntaxAnalyzer{
+class MySemanticAnalyzer extends MySyntaxAnalyzer{
   override def gittex(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)){
       // add to parse tree / stack
